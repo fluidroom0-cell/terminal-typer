@@ -60,12 +60,14 @@ def main(stdscr):
         XQUOTE, YQUOTE = abs((width//2) - (len(current_quote)//2)), height//2
         XERRORS, YERRORS = width//15, height - 5
         XHITS, YHITS = width//15, height - 4
+        XATTEMP, YATTEMP = width//15, height - 3
         stdscr.addstr(YTITTLE, XTITTLE, TITLE, MAGENTA)
         stdscr.addstr(YQUOTE, XQUOTE, current_quote)
         stdscr.addstr(YQUOTE, XQUOTE, replacement_str, current_color)
         stdscr.addstr(height - 3, width - 15, f"[{width}, {height}]")
         stdscr.addstr(YERRORS, XERRORS, f"Errors > {usr_errors}", RED)
         stdscr.addstr(YHITS, XHITS, f"Hits > {usr_hits}", GREEN)
+        stdscr.addstr(YATTEMP, XATTEMP, f"Attemps > { usr_attempts}", GREEN)
         stdscr.refresh()
 
         if usr_attempts == len(current_quote):
