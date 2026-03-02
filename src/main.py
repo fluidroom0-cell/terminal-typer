@@ -50,6 +50,7 @@ def main(stdscr):
     current_quote = getQuote()
     usr_attempts = 0 
     usr_errors = 0
+    usr_hits = 0
     replacement_str = ""
 
     while True:
@@ -57,12 +58,14 @@ def main(stdscr):
         height, width = stdscr.getmaxyx()
         XTITTLE, YTITTLE = ((width//2) - (len(TITLE)//2)), 2 
         XQUOTE, YQUOTE = abs((width//2) - (len(current_quote)//2)), height//2
-        XERRORS, YERRORS =  width//15, height - 5
+        XERRORS, YERRORS = width//15, height - 5
+        XHITS, YHITS = width//15, height - 4
         stdscr.addstr(YTITTLE, XTITTLE, TITLE, MAGENTA)
         stdscr.addstr(YQUOTE, XQUOTE, current_quote)
         stdscr.addstr(YQUOTE, XQUOTE, replacement_str, current_color)
         stdscr.addstr(height - 3, width - 15, f"[{width}, {height}]")
         stdscr.addstr(YERRORS, XERRORS, f"Errors > {usr_errors}", RED)
+        stdscr.addstr(YHITS, XHITS, f"Hits > {usr_hits}", GREEN)
         stdscr.refresh()
 
         if usr_attempts == len(current_quote):
@@ -78,7 +81,8 @@ def main(stdscr):
 
         if ord(current_quote[usr_attempts]) == key:
             replacement_str += current_quote[usr_attempts]
-            usr_attempts += 1 
+            usr_attempts += 1
+            usr_hits += 1
             current_color = GREEN
             
         else:
